@@ -2,12 +2,10 @@ kind: Module
 type: container
 name: react-app
 description: React App for TLS and DNS example
-build:
-  dependencies:
-    - name: cluster-issuers
 services:
   - name: frontend
-    dependencies: [cluster-issuers]
+    annotations:
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
     ports:
       - name: http
         containerPort: 3000
