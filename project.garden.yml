@@ -1,0 +1,21 @@
+kind: Project
+name: react-app-deployment-garden
+defaultEnvironment: local
+
+environments:
+  - name: local
+    defaultNamespace: ${var.DEFAULT_NAMESPACE}
+    variables:
+      base-hostname: local.app.garden
+
+providers:
+  - name: local-kubernetes
+    environments: [local]
+    context: docker-desktop # Make sure to change this to your own context
+    namespace: ${var.DEFAULT_NAMESPACE}
+    defaultHostname: ${var.base-hostname}
+    setupIngressController: nginx
+
+
+variables:
+  DEFAULT_NAMESPACE: default
